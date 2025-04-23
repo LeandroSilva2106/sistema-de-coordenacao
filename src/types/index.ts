@@ -65,15 +65,15 @@ export interface Report {
 
 // Translation mappings
 export const StatusTranslations = {
-  'pending': 'pendente',
-  'in-progress': 'em andamento',
-  'completed': 'concluído'
+  'pending': 'Pendente',
+  'in-progress': 'Em Andamento',
+  'completed': 'Concluído'
 } as const;
 
 export const PriorityTranslations = {
-  'low': 'baixa',
-  'medium': 'média',
-  'high': 'alta'
+  'low': 'Baixa',
+  'medium': 'Média',
+  'high': 'Alta'
 } as const;
 
 export const RoleTranslations = {

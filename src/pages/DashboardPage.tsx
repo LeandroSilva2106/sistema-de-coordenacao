@@ -6,7 +6,6 @@ import { CheckCircle, Clock, AlertCircle, Calendar, UserPlus, MessageSquare } fr
 const DashboardPage: React.FC = () => {
   const { user } = useAuth();
   
-  // Dashboard metrics would come from API in a real app
   const metrics = {
     taskStats: {
       completed: 24,
@@ -21,24 +20,24 @@ const DashboardPage: React.FC = () => {
   const renderWelcomeMessage = () => {
     switch (user?.role) {
       case UserRole.EXECUTIVE_MANAGER:
-        return "Welcome to your executive dashboard! Here's an overview of your team's performance.";
+        return "Bem-vindo ao seu painel executivo! Aqui está uma visão geral do desempenho da sua equipe.";
       case UserRole.COORDINATOR:
-        return "Welcome to your coordinator dashboard! Here's your team's current status.";
+        return "Bem-vindo ao seu painel de coordenação! Aqui está o status atual da sua equipe.";
       case UserRole.EMPLOYEE:
-        return "Welcome to your personal dashboard! Here's your current workload.";
+        return "Bem-vindo ao seu painel pessoal! Aqui está sua carga de trabalho atual.";
       default:
-        return "Welcome to your dashboard!";
+        return "Bem-vindo ao seu painel!";
     }
   };
 
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm p-6">
-        <h2 className="text-2xl font-semibold text-gray-800">{user?.name}'s Dashboard</h2>
+        <h2 className="text-2xl font-semibold text-gray-800">Painel de {user?.name}</h2>
         <p className="text-gray-600 mt-1">{renderWelcomeMessage()}</p>
       </div>
       
-      {/* Dashboard Cards */}
+      {/* Cards do Painel */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow-sm p-5 border-l-4 border-green-500">
           <div className="flex items-center">
@@ -46,7 +45,7 @@ const DashboardPage: React.FC = () => {
               <CheckCircle size={24} />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-600">Completed Tasks</p>
+              <p className="text-sm font-medium text-gray-600">Tarefas Concluídas</p>
               <p className="text-2xl font-semibold text-gray-800">{metrics.taskStats.completed}</p>
             </div>
           </div>
@@ -58,7 +57,7 @@ const DashboardPage: React.FC = () => {
               <Clock size={24} />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-600">In Progress</p>
+              <p className="text-sm font-medium text-gray-600">Em Andamento</p>
               <p className="text-2xl font-semibold text-gray-800">{metrics.taskStats.inProgress}</p>
             </div>
           </div>
@@ -70,7 +69,7 @@ const DashboardPage: React.FC = () => {
               <AlertCircle size={24} />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-600">Pending Tasks</p>
+              <p className="text-sm font-medium text-gray-600">Tarefas Pendentes</p>
               <p className="text-2xl font-semibold text-gray-800">{metrics.taskStats.pending}</p>
             </div>
           </div>
@@ -82,22 +81,22 @@ const DashboardPage: React.FC = () => {
               <Calendar size={24} />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-600">Upcoming Events</p>
+              <p className="text-sm font-medium text-gray-600">Eventos Próximos</p>
               <p className="text-2xl font-semibold text-gray-800">{metrics.upcomingEvents}</p>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Additional content based on role */}
+      {/* Conteúdo adicional baseado no papel */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Tasks */}
+        {/* Tarefas Recentes */}
         <div className="bg-white rounded-lg shadow-sm lg:col-span-2">
           <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-            <h3 className="text-lg font-medium text-gray-800">Recent Tasks</h3>
+            <h3 className="text-lg font-medium text-gray-800">Tarefas Recentes</h3>
             {(user?.role === UserRole.EXECUTIVE_MANAGER || user?.role === UserRole.COORDINATOR) && (
               <button className="text-sm text-blue-600 hover:text-blue-800">
-                Assign New Task
+                Atribuir Nova Tarefa
               </button>
             )}
           </div>
@@ -107,71 +106,71 @@ const DashboardPage: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="h-2 w-2 rounded-full bg-green-500 mr-3"></span>
-                    <span className="text-gray-800">Update marketing materials</span>
+                    <span className="text-gray-800">Atualizar materiais de marketing</span>
                   </div>
-                  <span className="text-sm text-gray-500">Due in 2 days</span>
+                  <span className="text-sm text-gray-500">Vence em 2 dias</span>
                 </div>
               </li>
               <li className="py-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="h-2 w-2 rounded-full bg-blue-500 mr-3"></span>
-                    <span className="text-gray-800">Review quarterly reports</span>
+                    <span className="text-gray-800">Revisar relatórios trimestrais</span>
                   </div>
-                  <span className="text-sm text-gray-500">Due tomorrow</span>
+                  <span className="text-sm text-gray-500">Vence amanhã</span>
                 </div>
               </li>
               <li className="py-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="h-2 w-2 rounded-full bg-red-500 mr-3"></span>
-                    <span className="text-gray-800">Client presentation preparation</span>
+                    <span className="text-gray-800">Preparação da apresentação para o cliente</span>
                   </div>
-                  <span className="text-sm text-gray-500">Overdue by 1 day</span>
+                  <span className="text-sm text-gray-500">Atrasado por 1 dia</span>
                 </div>
               </li>
             </ul>
           </div>
         </div>
         
-        {/* Recent Announcements */}
+        {/* Avisos Recentes */}
         <div className="bg-white rounded-lg shadow-sm">
           <div className="border-b border-gray-200 px-6 py-4">
-            <h3 className="text-lg font-medium text-gray-800">Recent Announcements</h3>
+            <h3 className="text-lg font-medium text-gray-800">Avisos Recentes</h3>
           </div>
           <div className="p-6">
             <div className="space-y-4">
               <div className="p-3 bg-blue-50 rounded-md">
-                <h4 className="font-medium text-blue-800">Team Meeting</h4>
+                <h4 className="font-medium text-blue-800">Reunião de Equipe</h4>
                 <p className="text-sm text-blue-600 mt-1">
-                  Reminder: Weekly team meeting tomorrow at 10 AM in the conference room.
+                  Lembrete: Reunião semanal de equipe amanhã às 10h na sala de conferência.
                 </p>
-                <p className="text-xs text-blue-500 mt-2">Posted 2 hours ago</p>
+                <p className="text-xs text-blue-500 mt-2">Publicado há 2 horas</p>
               </div>
               
               <div className="p-3 bg-amber-50 rounded-md">
-                <h4 className="font-medium text-amber-800">System Update</h4>
+                <h4 className="font-medium text-amber-800">Atualização do Sistema</h4>
                 <p className="text-sm text-amber-600 mt-1">
-                  The system will be down for maintenance tonight from 11 PM to 12 AM.
+                  O sistema estará em manutenção hoje das 23h às 00h.
                 </p>
-                <p className="text-xs text-amber-500 mt-2">Posted yesterday</p>
+                <p className="text-xs text-amber-500 mt-2">Publicado ontem</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Role-specific content */}
+      {/* Conteúdo específico por papel */}
       {(user?.role === UserRole.EXECUTIVE_MANAGER || user?.role === UserRole.COORDINATOR) && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Team Overview (only for managers and coordinators) */}
+          {/* Visão Geral da Equipe (apenas para gerentes e coordenadores) */}
           <div className="bg-white rounded-lg shadow-sm">
             <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-              <h3 className="text-lg font-medium text-gray-800">Team Overview</h3>
+              <h3 className="text-lg font-medium text-gray-800">Visão Geral da Equipe</h3>
               {user?.role === UserRole.EXECUTIVE_MANAGER && (
                 <button className="text-sm text-blue-600 hover:text-blue-800 flex items-center">
                   <UserPlus size={16} className="mr-1" />
-                  Add Member
+                  Adicionar Membro
                 </button>
               )}
             </div>
@@ -180,65 +179,65 @@ const DashboardPage: React.FC = () => {
                 <li className="py-3 flex items-center">
                   <img 
                     src="https://source.unsplash.com/random/200x200/?portrait&4" 
-                    alt="Team member" 
+                    alt="Membro da equipe" 
                     className="h-8 w-8 rounded-full mr-3"
                   />
                   <div>
                     <p className="text-sm font-medium text-gray-800">Alex Johnson</p>
-                    <p className="text-xs text-gray-500">3 tasks in progress</p>
+                    <p className="text-xs text-gray-500">3 tarefas em andamento</p>
                   </div>
                 </li>
                 <li className="py-3 flex items-center">
                   <img 
                     src="https://source.unsplash.com/random/200x200/?portrait&5" 
-                    alt="Team member" 
+                    alt="Membro da equipe" 
                     className="h-8 w-8 rounded-full mr-3"
                   />
                   <div>
                     <p className="text-sm font-medium text-gray-800">Maria Garcia</p>
-                    <p className="text-xs text-gray-500">5 tasks completed</p>
+                    <p className="text-xs text-gray-500">5 tarefas concluídas</p>
                   </div>
                 </li>
                 <li className="py-3 flex items-center">
                   <img 
                     src="https://source.unsplash.com/random/200x200/?portrait&6" 
-                    alt="Team member" 
+                    alt="Membro da equipe" 
                     className="h-8 w-8 rounded-full mr-3"
                   />
                   <div>
                     <p className="text-sm font-medium text-gray-800">David Kim</p>
-                    <p className="text-xs text-gray-500">2 tasks pending</p>
+                    <p className="text-xs text-gray-500">2 tarefas pendentes</p>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
           
-          {/* Quick Actions */}
+          {/* Ações Rápidas */}
           <div className="bg-white rounded-lg shadow-sm">
             <div className="border-b border-gray-200 px-6 py-4">
-              <h3 className="text-lg font-medium text-gray-800">Quick Actions</h3>
+              <h3 className="text-lg font-medium text-gray-800">Ações Rápidas</h3>
             </div>
             <div className="p-6">
               <div className="grid grid-cols-2 gap-4">
                 <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 transition-colors">
                   <UserPlus size={24} className="text-blue-600 mb-2" />
-                  <span className="text-sm text-gray-700">Assign Tasks</span>
+                  <span className="text-sm text-gray-700">Atribuir Tarefas</span>
                 </button>
                 
                 <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 transition-colors">
                   <Calendar size={24} className="text-blue-600 mb-2" />
-                  <span className="text-sm text-gray-700">Schedule Meeting</span>
+                  <span className="text-sm text-gray-700">Agendar Reunião</span>
                 </button>
                 
                 <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 transition-colors">
                   <MessageSquare size={24} className="text-blue-600 mb-2" />
-                  <span className="text-sm text-gray-700">Send Announcement</span>
+                  <span className="text-sm text-gray-700">Enviar Aviso</span>
                 </button>
                 
                 <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 transition-colors">
                   <AlertCircle size={24} className="text-blue-600 mb-2" />
-                  <span className="text-sm text-gray-700">View Reports</span>
+                  <span className="text-sm text-gray-700">Ver Relatórios</span>
                 </button>
               </div>
             </div>

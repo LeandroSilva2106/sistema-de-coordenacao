@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { UserRole, User } from '../types';
 
-// Mock users for demonstration
+// Usuários de demonstração
 const MOCK_USERS = [
   {
     id: '1',
@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for saved user in localStorage
+    // Verificar usuário salvo no localStorage
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
@@ -54,13 +54,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
     
-    // Simulate API call delay
+    // Simular atraso de API
     await new Promise(resolve => setTimeout(resolve, 800));
     
     const foundUser = MOCK_USERS.find(u => u.email === email && u.password === password);
     
     if (foundUser) {
-      // Remove password before saving to state/storage
+      // Remover senha antes de salvar no estado/storage
       const { password: _, ...userWithoutPassword } = foundUser;
       setUser(userWithoutPassword as User);
       localStorage.setItem('user', JSON.stringify(userWithoutPassword));

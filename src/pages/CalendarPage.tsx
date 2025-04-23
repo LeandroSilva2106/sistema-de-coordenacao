@@ -3,35 +3,35 @@ import { useAuth } from '../context/AuthContext';
 import { UserRole } from '../types';
 import { ChevronLeft, ChevronRight, Plus, Calendar, Users, MapPin, Clock } from 'lucide-react';
 
-// Mock events data
+// Dados simulados de eventos
 const mockEvents = [
   {
     id: '1',
-    title: 'Team Meeting',
-    description: 'Weekly sync-up with the development team',
+    title: 'Reunião de Equipe',
+    description: 'Sincronização semanal com a equipe de desenvolvimento',
     startTime: '2025-06-15T10:00:00Z',
     endTime: '2025-06-15T11:00:00Z',
-    location: 'Conference Room A',
+    location: 'Sala de Conferência A',
     attendees: ['1', '2', '3'],
     createdBy: '1',
   },
   {
     id: '2',
-    title: 'Client Presentation',
-    description: 'Present quarterly results to Client XYZ',
+    title: 'Apresentação para Cliente',
+    description: 'Apresentar resultados trimestrais para Cliente XYZ',
     startTime: '2025-06-16T14:00:00Z',
     endTime: '2025-06-16T15:30:00Z',
-    location: 'Virtual Meeting',
+    location: 'Reunião Virtual',
     attendees: ['1', '2'],
     createdBy: '1',
   },
   {
     id: '3',
-    title: 'Project Planning',
-    description: 'Planning session for the new marketing campaign',
+    title: 'Planejamento de Projeto',
+    description: 'Sessão de planejamento para a nova campanha de marketing',
     startTime: '2025-06-17T09:30:00Z',
     endTime: '2025-06-17T12:00:00Z',
-    location: 'Conference Room B',
+    location: 'Sala de Conferência B',
     attendees: ['1', '2', '3'],
     createdBy: '2',
   },
@@ -41,11 +41,11 @@ const CalendarPage: React.FC = () => {
   const { user } = useAuth();
   const canCreateEvents = user?.role !== UserRole.EMPLOYEE;
   
-  // Current date state
+  // Estado da data atual
   const [currentDate, setCurrentDate] = useState(new Date());
   const [view, setView] = useState<'month' | 'week' | 'day'>('month');
   
-  // Navigation functions
+  // Funções de navegação
   const previousMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   };
@@ -54,9 +54,9 @@ const CalendarPage: React.FC = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
   
-  // Format date utilities
+  // Utilitários de formatação de data
   const formatMonth = () => {
-    return new Intl.DateTimeFormat('en-US', { 
+    return new Intl.DateTimeFormat('pt-BR', { 
       month: 'long', 
       year: 'numeric' 
     }).format(currentDate);
@@ -66,42 +66,42 @@ const CalendarPage: React.FC = () => {
     const start = new Date(startTime);
     const end = new Date(endTime);
     
-    return `${start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    return `${start.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
   };
   
   const formatEventDate = (dateString: string) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', { 
+    return new Intl.DateTimeFormat('pt-BR', { 
       weekday: 'long',
-      month: 'short', 
       day: 'numeric',
+      month: 'long',
     }).format(date);
   };
 
-  // Generate days for the current month
+  // Gerar dias para o mês atual
   const generateCalendarDays = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     
-    // First day of the month
+    // Primeiro dia do mês
     const firstDay = new Date(year, month, 1);
-    // Last day of the month
+    // Último dia do mês
     const lastDay = new Date(year, month + 1, 0);
     
-    // Day of the week for the first day (0 = Sunday, 6 = Saturday)
+    // Dia da semana para o primeiro dia (0 = Domingo, 6 = Sábado)
     const firstDayIndex = firstDay.getDay();
-    // Total days in month
+    // Total de dias no mês
     const daysInMonth = lastDay.getDate();
     
-    // Create array for all cells in calendar (6 rows x 7 days)
+    // Criar array para todas as células do calendário (6 linhas x 7 dias)
     const days = [];
     
-    // Add empty cells for days before the first of the month
+    // Adicionar células vazias para os dias antes do primeiro dia do mês
     for (let i = 0; i < firstDayIndex; i++) {
       days.push(null);
     }
     
-    // Add cells for each day of the month
+    // Adicionar células para cada dia do mês
     for (let day = 1; day <= daysInMonth; day++) {
       days.push(new Date(year, month, day));
     }
@@ -109,7 +109,7 @@ const CalendarPage: React.FC = () => {
     return days;
   };
   
-  // Get events for a specific day
+  // Obter eventos para um dia específico
   const getEventsForDay = (date: Date) => {
     if (!date) return [];
     
@@ -123,15 +123,15 @@ const CalendarPage: React.FC = () => {
     });
   };
   
-  // Calendar grid
+  // Grade do calendário
   const calendarDays = generateCalendarDays();
-  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-          <h2 className="text-2xl font-semibold text-gray-800">Calendar</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Calendário</h2>
           
           <div className="flex space-x-2">
             <div className="inline-flex rounded-md shadow-sm">
@@ -144,7 +144,7 @@ const CalendarPage: React.FC = () => {
                 }`}
                 onClick={() => setView('month')}
               >
-                Month
+                Mês
               </button>
               <button
                 type="button"
@@ -155,7 +155,7 @@ const CalendarPage: React.FC = () => {
                 }`}
                 onClick={() => setView('week')}
               >
-                Week
+                Semana
               </button>
               <button
                 type="button"
@@ -166,21 +166,21 @@ const CalendarPage: React.FC = () => {
                 }`}
                 onClick={() => setView('day')}
               >
-                Day
+                Dia
               </button>
             </div>
             
             {canCreateEvents && (
               <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 <Plus size={16} className="mr-2" />
-                Create Event
+                Criar Evento
               </button>
             )}
           </div>
         </div>
       </div>
       
-      {/* Calendar Navigation */}
+      {/* Navegação do Calendário */}
       <div className="bg-white rounded-lg shadow-sm p-4">
         <div className="flex items-center justify-between">
           <button 
@@ -201,7 +201,7 @@ const CalendarPage: React.FC = () => {
         </div>
       </div>
       
-      {/* Month View */}
+      {/* Visualização Mensal */}
       {view === 'month' && (
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <div className="grid grid-cols-7 gap-px bg-gray-200">
@@ -255,10 +255,10 @@ const CalendarPage: React.FC = () => {
         </div>
       )}
       
-      {/* Event list (as a simplified alternate view) */}
+      {/* Lista de eventos (como uma visualização alternativa simplificada) */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Upcoming Events</h3>
+          <h3 className="text-lg font-medium text-gray-900">Próximos Eventos</h3>
         </div>
         
         <ul className="divide-y divide-gray-200">
@@ -293,16 +293,15 @@ const CalendarPage: React.FC = () => {
                 <div className="flex items-center">
                   <Users size={16} className="mr-2 text-gray-400" />
                   <div className="flex -space-x-1 overflow-hidden">
-                    {/* This would map through attendees in a real app */}
                     <img 
                       className="h-6 w-6 rounded-full border-2 border-white" 
                       src="https://source.unsplash.com/random/200x200/?portrait&9"
-                      alt="Attendee" 
+                      alt="Participante" 
                     />
                     <img 
                       className="h-6 w-6 rounded-full border-2 border-white" 
                       src="https://source.unsplash.com/random/200x200/?portrait&10"
-                      alt="Attendee" 
+                      alt="Participante" 
                     />
                     <span className="flex items-center justify-center h-6 w-6 rounded-full bg-gray-200 text-xs font-medium text-gray-500">
                       +3

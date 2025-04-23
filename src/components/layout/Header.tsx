@@ -20,11 +20,11 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         </div>
         
         <div className="flex items-center space-x-4">
-          <button className="p-1 rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100">
+          <button className="p-1 rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100" title="Notificações">
             <Bell size={20} />
           </button>
           
-          <Link to="/settings" className="p-1 rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100">
+          <Link to="/settings" className="p-1 rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100" title="Configurações">
             <Settings size={20} />
           </Link>
           
@@ -50,6 +50,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           <button 
             onClick={logout}
             className="p-1 rounded-full text-gray-600 hover:text-red-600 hover:bg-red-50"
+            title="Sair"
           >
             <LogOut size={20} />
           </button>

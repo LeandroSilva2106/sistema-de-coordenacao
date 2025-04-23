@@ -3,12 +3,12 @@ import { useAuth } from '../context/AuthContext';
 import { UserRole, Task } from '../types';
 import { Plus, Filter, Search, ArrowUp, ArrowDown, Check, Clock, AlertCircle } from 'lucide-react';
 
-// Mock tasks data
+// Dados simulados de tarefas
 const mockTasks: Task[] = [
   {
     id: '1',
-    title: 'Complete quarterly report',
-    description: 'Finalize the Q3 performance report with updated metrics and charts',
+    title: 'Completar relatório trimestral',
+    description: 'Finalizar o relatório de desempenho do Q3 com métricas e gráficos atualizados',
     status: 'in-progress',
     priority: 'high',
     assignedTo: ['2', '3'],
@@ -18,7 +18,7 @@ const mockTasks: Task[] = [
     comments: [
       {
         id: '101',
-        text: 'I\'ve added the sales numbers to section 3',
+        text: 'Adicionei os números de vendas na seção 3',
         userId: '3',
         timestamp: '2025-06-12T14:30:00Z',
       }
@@ -26,8 +26,8 @@ const mockTasks: Task[] = [
   },
   {
     id: '2',
-    title: 'Update client presentation',
-    description: 'Revise slides for the upcoming client meeting',
+    title: 'Atualizar apresentação do cliente',
+    description: 'Revisar slides para a próxima reunião com o cliente',
     status: 'pending',
     priority: 'medium',
     assignedTo: ['3'],
@@ -38,8 +38,8 @@ const mockTasks: Task[] = [
   },
   {
     id: '3',
-    title: 'Research market trends',
-    description: 'Gather and analyze recent industry reports for strategy meeting',
+    title: 'Pesquisar tendências de mercado',
+    description: 'Coletar e analisar relatórios recentes da indústria para reunião de estratégia',
     status: 'completed',
     priority: 'low',
     assignedTo: ['2'],
@@ -49,7 +49,7 @@ const mockTasks: Task[] = [
     comments: [
       {
         id: '102',
-        text: 'Completed analysis, will share findings in meeting',
+        text: 'Análise concluída, compartilharei os resultados na reunião',
         userId: '2',
         timestamp: '2025-06-11T16:45:00Z',
       }
@@ -68,12 +68,12 @@ const TasksPage: React.FC = () => {
   const canCreateTasks = user?.role !== UserRole.EMPLOYEE;
   
   const filteredTasks = tasks.filter(task => {
-    // Status filter
+    // Filtro por status
     if (statusFilter !== 'all' && task.status !== statusFilter) {
       return false;
     }
     
-    // Search filter
+    // Filtro por busca
     if (searchTerm && !task.title.toLowerCase().includes(searchTerm.toLowerCase())) {
       return false;
     }
@@ -81,7 +81,7 @@ const TasksPage: React.FC = () => {
     return true;
   });
   
-  // Sort tasks
+  // Ordenar tarefas
   const sortedTasks = [...filteredTasks].sort((a, b) => {
     if (sortBy === 'dueDate') {
       const aTime = new Date(a.dueDate).getTime();
@@ -105,38 +105,38 @@ const TasksPage: React.FC = () => {
     }
   };
   
-  // Function to format dates
+  // Função para formatar datas
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
+    return new Intl.DateTimeFormat('pt-BR', { 
+      day: 'numeric',
+      month: 'short',
       year: 'numeric'
     }).format(date);
   };
   
-  // Render status badge
+  // Renderizar badge de status
   const renderStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
             <Check size={12} className="mr-1" />
-            Completed
+            Concluído
           </span>
         );
       case 'in-progress':
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
             <Clock size={12} className="mr-1" />
-            In Progress
+            Em Andamento
           </span>
         );
       case 'pending':
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
             <AlertCircle size={12} className="mr-1" />
-            Pending
+            Pendente
           </span>
         );
       default:
@@ -144,25 +144,25 @@ const TasksPage: React.FC = () => {
     }
   };
   
-  // Render priority indicator
+  // Renderizar indicador de prioridade
   const renderPriorityIndicator = (priority: string) => {
     switch (priority) {
       case 'high':
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-            High
+            Alta
           </span>
         );
       case 'medium':
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
-            Medium
+            Média
           </span>
         );
       case 'low':
         return (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-            Low
+            Baixa
           </span>
         );
       default:
@@ -174,17 +174,17 @@ const TasksPage: React.FC = () => {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-          <h2 className="text-2xl font-semibold text-gray-800">Tasks Management</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Gestão de Tarefas</h2>
           {canCreateTasks && (
             <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               <Plus size={16} className="mr-2" />
-              Create Task
+              Criar Tarefa
             </button>
           )}
         </div>
       </div>
       
-      {/* Filters and Search */}
+      {/* Filtros e Busca */}
       <div className="bg-white rounded-lg shadow-sm p-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -195,7 +195,7 @@ const TasksPage: React.FC = () => {
               <input
                 type="text"
                 className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md"
-                placeholder="Search tasks..."
+                placeholder="Buscar tarefas..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -208,10 +208,10 @@ const TasksPage: React.FC = () => {
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
-                <option value="all">All Status</option>
-                <option value="pending">Pending</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
+                <option value="all">Todos os Status</option>
+                <option value="pending">Pendente</option>
+                <option value="in-progress">Em Andamento</option>
+                <option value="completed">Concluído</option>
               </select>
             </div>
           </div>
@@ -221,7 +221,7 @@ const TasksPage: React.FC = () => {
               className="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               onClick={() => toggleSort('dueDate')}
             >
-              Due Date
+              Data de Vencimento
               {sortBy === 'dueDate' && (
                 sortDirection === 'asc' ? 
                 <ArrowUp size={16} className="ml-1" /> : 
@@ -233,7 +233,7 @@ const TasksPage: React.FC = () => {
               className="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               onClick={() => toggleSort('priority')}
             >
-              Priority
+              Prioridade
               {sortBy === 'priority' && (
                 sortDirection === 'asc' ? 
                 <ArrowUp size={16} className="ml-1" /> : 
@@ -244,7 +244,7 @@ const TasksPage: React.FC = () => {
         </div>
       </div>
       
-      {/* Tasks List */}
+      {/* Lista de Tarefas */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         {sortedTasks.length > 0 ? (
           <ul className="divide-y divide-gray-200">
@@ -264,30 +264,29 @@ const TasksPage: React.FC = () => {
                   <div className="flex flex-wrap items-center justify-between text-sm text-gray-500 pt-2">
                     <div className="flex items-center">
                       <Clock size={16} className="mr-1" />
-                      <span>Due: {formatDate(task.dueDate)}</span>
+                      <span>Vence em: {formatDate(task.dueDate)}</span>
                       
                       <span className="mx-2">•</span>
                       
                       <div className="flex -space-x-1 overflow-hidden">
-                        {/* This would map through assigned users in a real app */}
                         <img 
                           className="h-6 w-6 rounded-full border-2 border-white" 
                           src="https://source.unsplash.com/random/200x200/?portrait&7"
-                          alt="Assigned user" 
+                          alt="Usuário atribuído" 
                         />
                         <img 
                           className="h-6 w-6 rounded-full border-2 border-white" 
                           src="https://source.unsplash.com/random/200x200/?portrait&8"
-                          alt="Assigned user" 
+                          alt="Usuário atribuído" 
                         />
                       </div>
                     </div>
                     
                     <div className="flex items-center mt-2 sm:mt-0">
-                      <span className="mr-2">{task.comments.length} comments</span>
+                      <span className="mr-2">{task.comments.length} comentários</span>
                       
                       <button className="text-blue-600 hover:text-blue-800 text-sm">
-                        View Details
+                        Ver Detalhes
                       </button>
                     </div>
                   </div>
@@ -297,7 +296,7 @@ const TasksPage: React.FC = () => {
           </ul>
         ) : (
           <div className="py-10 px-6 text-center">
-            <p className="text-gray-500">No tasks match your filters.</p>
+            <p className="text-gray-500">Nenhuma tarefa corresponde aos seus filtros.</p>
           </div>
         )}
       </div>

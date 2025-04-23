@@ -7,41 +7,41 @@ const ReportsPage: React.FC = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('performance');
   
-  // Check if user has access to this page
+  // Verificar se o usuário tem acesso a esta página
   if (user?.role === UserRole.EMPLOYEE) {
     return (
       <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Access Restricted</h2>
-        <p className="text-gray-600">You don't have permission to view reports.</p>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Acesso Restrito</h2>
+        <p className="text-gray-600">Você não tem permissão para visualizar relatórios.</p>
       </div>
     );
   }
 
-  // Tabs for different report types
+  // Abas para diferentes tipos de relatório
   const tabs = [
-    { id: 'performance', label: 'Team Performance', icon: <TrendingUp size={18} /> },
-    { id: 'tasks', label: 'Task Analysis', icon: <BarChart2 size={18} /> },
-    { id: 'attendance', label: 'Attendance', icon: <PieChart size={18} /> },
+    { id: 'performance', label: 'Desempenho da Equipe', icon: <TrendingUp size={18} /> },
+    { id: 'tasks', label: 'Análise de Tarefas', icon: <BarChart2 size={18} /> },
+    { id: 'attendance', label: 'Presença', icon: <PieChart size={18} /> },
   ];
 
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-          <h2 className="text-2xl font-semibold text-gray-800">Reports & Analytics</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Relatórios e Análises</h2>
           
           {user?.role === UserRole.EXECUTIVE_MANAGER && (
             <div className="inline-flex rounded-md shadow-sm">
               <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 <Download size={16} className="mr-2" />
-                Export Reports
+                Exportar Relatórios
               </button>
             </div>
           )}
         </div>
       </div>
       
-      {/* Report Tabs */}
+      {/* Abas de Relatório */}
       <div className="bg-white rounded-lg shadow-sm">
         <div className="border-b border-gray-200">
           <nav className="flex -mb-px overflow-x-auto">
@@ -64,86 +64,86 @@ const ReportsPage: React.FC = () => {
           </nav>
         </div>
         
-        {/* Report Content */}
+        {/* Conteúdo do Relatório */}
         <div className="p-6">
-          {/* Filters */}
+          {/* Filtros */}
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <div className="flex items-center">
               <Filter size={18} className="text-gray-500 mr-2" />
-              <span className="text-gray-700 font-medium mr-2">Time Period:</span>
+              <span className="text-gray-700 font-medium mr-2">Período:</span>
               <select className="rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                <option>Last 7 days</option>
-                <option>Last 30 days</option>
-                <option>Last 90 days</option>
-                <option>Year to date</option>
-                <option>Custom range</option>
+                <option>Últimos 7 dias</option>
+                <option>Últimos 30 dias</option>
+                <option>Últimos 90 dias</option>
+                <option>Ano atual</option>
+                <option>Período personalizado</option>
               </select>
             </div>
             
             {activeTab === 'performance' && (
               <div className="flex items-center">
-                <span className="text-gray-700 font-medium mr-2">Team:</span>
+                <span className="text-gray-700 font-medium mr-2">Equipe:</span>
                 <select className="rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                  <option>All Teams</option>
-                  <option>Development</option>
+                  <option>Todas as Equipes</option>
+                  <option>Desenvolvimento</option>
                   <option>Marketing</option>
-                  <option>Sales</option>
+                  <option>Vendas</option>
                 </select>
               </div>
             )}
           </div>
           
-          {/* Report Content based on active tab */}
+          {/* Conteúdo baseado na aba ativa */}
           {activeTab === 'performance' && (
             <div className="space-y-6">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Team Performance Overview</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Visão Geral do Desempenho da Equipe</h3>
                 
-                {/* Placeholder for chart */}
+                {/* Placeholder para gráfico */}
                 <div className="h-64 bg-white border border-gray-200 rounded-lg flex items-center justify-center">
                   <BarChart2 size={48} className="text-gray-300" />
-                  <span className="ml-2 text-gray-500">Performance Chart</span>
+                  <span className="ml-2 text-gray-500">Gráfico de Desempenho</span>
                 </div>
                 
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Tasks Completed</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Tarefas Concluídas</h4>
                     <p className="text-2xl font-bold text-gray-800">87%</p>
-                    <span className="text-xs text-green-600">↑ 12% from last period</span>
+                    <span className="text-xs text-green-600">↑ 12% em relação ao período anterior</span>
                   </div>
                   
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Average Time per Task</h4>
-                    <p className="text-2xl font-bold text-gray-800">2.4 days</p>
-                    <span className="text-xs text-red-600">↑ 0.3 days from last period</span>
+                    <h4 className="text-sm font-medium text-gray-500">Tempo Médio por Tarefa</h4>
+                    <p className="text-2xl font-bold text-gray-800">2,4 dias</p>
+                    <span className="text-xs text-red-600">↑ 0,3 dias em relação ao período anterior</span>
                   </div>
                   
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Team Efficiency</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Eficiência da Equipe</h4>
                     <p className="text-2xl font-bold text-gray-800">92%</p>
-                    <span className="text-xs text-green-600">↑ 5% from last period</span>
+                    <span className="text-xs text-green-600">↑ 5% em relação ao período anterior</span>
                   </div>
                 </div>
               </div>
               
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Individual Performance</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Desempenho Individual</h3>
                 
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white">
                     <thead>
                       <tr>
                         <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Employee
+                          Funcionário
                         </th>
                         <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Tasks Completed
+                          Tarefas Concluídas
                         </th>
                         <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Avg. Time
+                          Tempo Médio
                         </th>
                         <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Efficiency
+                          Eficiência
                         </th>
                       </tr>
                     </thead>
@@ -156,7 +156,7 @@ const ReportsPage: React.FC = () => {
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">Alex Johnson</div>
-                              <div className="text-sm text-gray-500">Development</div>
+                              <div className="text-sm text-gray-500">Desenvolvimento</div>
                             </div>
                           </div>
                         </td>
@@ -164,7 +164,7 @@ const ReportsPage: React.FC = () => {
                           24
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
-                          1.8 days
+                          1,8 dias
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
                           95%
@@ -186,7 +186,7 @@ const ReportsPage: React.FC = () => {
                           18
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
-                          2.1 days
+                          2,1 dias
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
                           89%
@@ -200,7 +200,7 @@ const ReportsPage: React.FC = () => {
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">David Kim</div>
-                              <div className="text-sm text-gray-500">Development</div>
+                              <div className="text-sm text-gray-500">Desenvolvimento</div>
                             </div>
                           </div>
                         </td>
@@ -208,7 +208,7 @@ const ReportsPage: React.FC = () => {
                           29
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
-                          1.5 days
+                          1,5 dias
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
                           97%
@@ -224,17 +224,17 @@ const ReportsPage: React.FC = () => {
           {activeTab === 'tasks' && (
             <div className="space-y-6">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Task Status Distribution</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Distribuição de Status das Tarefas</h3>
                 
-                {/* Placeholder for chart */}
+                {/* Placeholder para gráfico */}
                 <div className="h-64 bg-white border border-gray-200 rounded-lg flex items-center justify-center">
                   <PieChart size={48} className="text-gray-300" />
-                  <span className="ml-2 text-gray-500">Task Distribution Chart</span>
+                  <span className="ml-2 text-gray-500">Gráfico de Distribuição de Tarefas</span>
                 </div>
                 
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Completed</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Concluídas</h4>
                     <p className="text-2xl font-bold text-gray-800">65%</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                       <div className="bg-green-500 h-2 rounded-full" style={{ width: '65%' }}></div>
@@ -242,7 +242,7 @@ const ReportsPage: React.FC = () => {
                   </div>
                   
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">In Progress</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Em Andamento</h4>
                     <p className="text-2xl font-bold text-gray-800">25%</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                       <div className="bg-blue-500 h-2 rounded-full" style={{ width: '25%' }}></div>
@@ -250,7 +250,7 @@ const ReportsPage: React.FC = () => {
                   </div>
                   
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Pending</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Pendentes</h4>
                     <p className="text-2xl font-bold text-gray-800">10%</p>
                     <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                       <div className="bg-amber-500 h-2 rounded-full" style={{ width: '10%' }}></div>
@@ -260,12 +260,12 @@ const ReportsPage: React.FC = () => {
               </div>
               
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Task Completion Trend</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Tendência de Conclusão de Tarefas</h3>
                 
-                {/* Placeholder for chart */}
+                {/* Placeholder para gráfico */}
                 <div className="h-64 bg-white border border-gray-200 rounded-lg flex items-center justify-center">
                   <TrendingUp size={48} className="text-gray-300" />
-                  <span className="ml-2 text-gray-500">Task Completion Trend Chart</span>
+                  <span className="ml-2 text-gray-500">Gráfico de Tendência de Conclusão</span>
                 </div>
               </div>
             </div>
@@ -274,53 +274,53 @@ const ReportsPage: React.FC = () => {
           {activeTab === 'attendance' && (
             <div className="space-y-6">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Team Attendance Overview</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Visão Geral de Presença da Equipe</h3>
                 
-                {/* Placeholder for chart */}
+                {/* Placeholder para gráfico */}
                 <div className="h-64 bg-white border border-gray-200 rounded-lg flex items-center justify-center">
                   <BarChart2 size={48} className="text-gray-300" />
-                  <span className="ml-2 text-gray-500">Attendance Chart</span>
+                  <span className="ml-2 text-gray-500">Gráfico de Presença</span>
                 </div>
                 
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Present</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Presentes</h4>
                     <p className="text-2xl font-bold text-gray-800">92%</p>
-                    <span className="text-xs text-green-600">↑ 3% from last month</span>
+                    <span className="text-xs text-green-600">↑ 3% em relação ao mês anterior</span>
                   </div>
                   
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Late Arrivals</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Atrasos</h4>
                     <p className="text-2xl font-bold text-gray-800">4%</p>
-                    <span className="text-xs text-green-600">↓ 2% from last month</span>
+                    <span className="text-xs text-green-600">↓ 2% em relação ao mês anterior</span>
                   </div>
                   
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h4 className="text-sm font-medium text-gray-500">Absences</h4>
+                    <h4 className="text-sm font-medium text-gray-500">Ausências</h4>
                     <p className="text-2xl font-bold text-gray-800">4%</p>
-                    <span className="text-xs text-amber-600">↓ 1% from last month</span>
+                    <span className="text-xs text-amber-600">↓ 1% em relação ao mês anterior</span>
                   </div>
                 </div>
               </div>
               
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Individual Attendance</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">Presença Individual</h3>
                 
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white">
                     <thead>
                       <tr>
                         <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Employee
+                          Funcionário
                         </th>
                         <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Present
+                          Presentes
                         </th>
                         <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Late
+                          Atrasos
                         </th>
                         <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Absent
+                          Ausências
                         </th>
                       </tr>
                     </thead>
@@ -333,7 +333,7 @@ const ReportsPage: React.FC = () => {
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">Alex Johnson</div>
-                              <div className="text-sm text-gray-500">Development</div>
+                              <div className="text-sm text-gray-500">Desenvolvimento</div>
                             </div>
                           </div>
                         </td>
@@ -377,7 +377,7 @@ const ReportsPage: React.FC = () => {
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">David Kim</div>
-                              <div className="text-sm text-gray-500">Development</div>
+                              <div className="text-sm text-gray-500">Desenvolvimento</div>
                             </div>
                           </div>
                         </td>

@@ -3,39 +3,39 @@ import { useAuth } from '../context/AuthContext';
 import { UserRole } from '../types';
 import { Search, UserPlus, Edit, Trash2, Lock, MoreHorizontal } from 'lucide-react';
 
-// Mock users data
+// Dados simulados de usuários
 const mockUsers = [
   {
     id: '1',
-    name: 'John Manager',
-    email: 'manager@example.com',
+    name: 'João Gerente',
+    email: 'gerente@exemplo.com',
     role: UserRole.EXECUTIVE_MANAGER,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&1',
     status: 'active',
-    department: 'Management',
+    department: 'Gestão',
   },
   {
     id: '2',
-    name: 'Sara Coordinator',
-    email: 'coordinator@example.com',
+    name: 'Sara Coordenadora',
+    email: 'coordenadora@exemplo.com',
     role: UserRole.COORDINATOR,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&2',
     status: 'active',
-    department: 'Operations',
+    department: 'Operações',
   },
   {
     id: '3',
-    name: 'Mike Employee',
-    email: 'employee@example.com',
+    name: 'Miguel Funcionário',
+    email: 'funcionario@exemplo.com',
     role: UserRole.EMPLOYEE,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&3',
     status: 'active',
-    department: 'Development',
+    department: 'Desenvolvimento',
   },
   {
     id: '4',
     name: 'Emily Wilson',
-    email: 'emily@example.com',
+    email: 'emily@exemplo.com',
     role: UserRole.EMPLOYEE,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&4',
     status: 'active',
@@ -43,21 +43,21 @@ const mockUsers = [
   },
   {
     id: '5',
-    name: 'Robert Taylor',
-    email: 'robert@example.com',
+    name: 'Roberto Silva',
+    email: 'roberto@exemplo.com',
     role: UserRole.EMPLOYEE,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&5',
     status: 'inactive',
-    department: 'Sales',
+    department: 'Vendas',
   },
   {
     id: '6',
     name: 'Jessica Patel',
-    email: 'jessica@example.com',
+    email: 'jessica@exemplo.com',
     role: UserRole.COORDINATOR,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&6',
     status: 'active',
-    department: 'HR',
+    department: 'RH',
   },
 ];
 
@@ -67,24 +67,24 @@ const UsersPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterRole, setFilterRole] = useState<string>('all');
   
-  // Check if user has access to this page
+  // Verificar se o usuário tem acesso a esta página
   if (user?.role === UserRole.EMPLOYEE) {
     return (
       <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Access Restricted</h2>
-        <p className="text-gray-600">You don't have permission to manage users.</p>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Acesso Restrito</h2>
+        <p className="text-gray-600">Você não tem permissão para gerenciar usuários.</p>
       </div>
     );
   }
   
-  // Filter users based on search and role filter
+  // Filtrar usuários com base na busca e filtro de papel
   const filteredUsers = users.filter(u => {
-    // Role filter
+    // Filtro por papel
     if (filterRole !== 'all' && u.role !== filterRole) {
       return false;
     }
     
-    // Search filter
+    // Filtro por busca
     if (searchTerm && !u.name.toLowerCase().includes(searchTerm.toLowerCase()) && 
         !u.email.toLowerCase().includes(searchTerm.toLowerCase())) {
       return false;
@@ -93,32 +93,32 @@ const UsersPage: React.FC = () => {
     return true;
   });
   
-  // Format role display
+  // Formatar exibição do papel
   const formatRole = (role: UserRole) => {
     switch (role) {
       case UserRole.EXECUTIVE_MANAGER:
-        return 'Executive Manager';
+        return 'Gerente Executivo';
       case UserRole.COORDINATOR:
-        return 'Coordinator';
+        return 'Coordenador';
       case UserRole.EMPLOYEE:
-        return 'Employee';
+        return 'Funcionário';
       default:
         return role;
     }
   };
   
-  // Get status badge
+  // Obter badge de status
   const getStatusBadge = (status: string) => {
     if (status === 'active') {
       return (
         <span className="inline-flex px-2 text-xs font-semibold leading-5 rounded-full bg-green-100 text-green-800">
-          Active
+          Ativo
         </span>
       );
     } else {
       return (
         <span className="inline-flex px-2 text-xs font-semibold leading-5 rounded-full bg-gray-100 text-gray-800">
-          Inactive
+          Inativo
         </span>
       );
     }
@@ -128,18 +128,18 @@ const UsersPage: React.FC = () => {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-          <h2 className="text-2xl font-semibold text-gray-800">User Management</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Gestão de Usuários</h2>
           
           {user?.role === UserRole.EXECUTIVE_MANAGER && (
             <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               <UserPlus size={16} className="mr-2" />
-              Add User
+              Adicionar Usuário
             </button>
           )}
         </div>
       </div>
       
-      {/* Search and Filters */}
+      {/* Busca e Filtros */}
       <div className="bg-white rounded-lg shadow-sm p-4">
         <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
           <div className="relative rounded-md shadow-sm max-w-xs">
@@ -149,7 +149,7 @@ const UsersPage: React.FC = () => {
             <input
               type="text"
               className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 pr-12 sm:text-sm border-gray-300 rounded-md"
-              placeholder="Search users..."
+              placeholder="Buscar usuários..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -160,34 +160,34 @@ const UsersPage: React.FC = () => {
             value={filterRole}
             onChange={(e) => setFilterRole(e.target.value)}
           >
-            <option value="all">All Roles</option>
-            <option value={UserRole.EXECUTIVE_MANAGER}>Executive Managers</option>
-            <option value={UserRole.COORDINATOR}>Coordinators</option>
-            <option value={UserRole.EMPLOYEE}>Employees</option>
+            <option value="all">Todos os Papéis</option>
+            <option value={UserRole.EXECUTIVE_MANAGER}>Gerentes Executivos</option>
+            <option value={UserRole.COORDINATOR}>Coordenadores</option>
+            <option value={UserRole.EMPLOYEE}>Funcionários</option>
           </select>
         </div>
       </div>
       
-      {/* Users Table */}
+      {/* Tabela de Usuários */}
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  User
+                  Usuário
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Role
+                  Papel
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Department
+                  Departamento
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
                 <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  Ações
                 </th>
               </tr>
             </thead>
@@ -216,18 +216,18 @@ const UsersPage: React.FC = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex items-center justify-end space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900">
+                      <button className="text-blue-600 hover:text-blue-900" title="Editar">
                         <Edit size={18} />
                       </button>
-                      <button className="text-amber-600 hover:text-amber-900">
+                      <button className="text-amber-600 hover:text-amber-900" title="Alterar Senha">
                         <Lock size={18} />
                       </button>
                       {user.role !== UserRole.EXECUTIVE_MANAGER && (
-                        <button className="text-red-600 hover:text-red-900">
+                        <button className="text-red-600 hover:text-red-900" title="Excluir">
                           <Trash2 size={18} />
                         </button>
                       )}
-                      <button className="text-gray-400 hover:text-gray-500">
+                      <button className="text-gray-400 hover:text-gray-500" title="Mais Opções">
                         <MoreHorizontal size={18} />
                       </button>
                     </div>
@@ -238,7 +238,7 @@ const UsersPage: React.FC = () => {
               {filteredUsers.length === 0 && (
                 <tr>
                   <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                    No users found matching your search criteria.
+                    Nenhum usuário encontrado com os critérios de busca.
                   </td>
                 </tr>
               )}
@@ -247,41 +247,41 @@ const UsersPage: React.FC = () => {
         </div>
       </div>
       
-      {/* User Permissions Explanation */}
+      {/* Explicação das Permissões de Usuário */}
       <div className="bg-white rounded-lg shadow-sm p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">User Role Permissions</h3>
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Permissões por Papel de Usuário</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="border border-gray-200 rounded-lg p-4">
-            <h4 className="font-medium text-blue-600 mb-2">Executive Manager</h4>
+            <h4 className="font-medium text-blue-600 mb-2">Gerente Executivo</h4>
             <ul className="text-sm text-gray-600 space-y-1">
-              <li>• Access to all system features</li>
-              <li>• Create and manage all user accounts</li>
-              <li>• View and generate all reports</li>
-              <li>• Manage system settings</li>
-              <li>• View team performance metrics</li>
+              <li>• Acesso a todas as funcionalidades</li>
+              <li>• Criar e gerenciar contas de usuário</li>
+              <li>• Visualizar e gerar relatórios</li>
+              <li>• Gerenciar configurações do sistema</li>
+              <li>• Ver métricas de desempenho da equipe</li>
             </ul>
           </div>
           
           <div className="border border-gray-200 rounded-lg p-4">
-            <h4 className="font-medium text-blue-600 mb-2">Coordinator</h4>
+            <h4 className="font-medium text-blue-600 mb-2">Coordenador</h4>
             <ul className="text-sm text-gray-600 space-y-1">
-              <li>• Manage assigned team members</li>
-              <li>• Assign and track tasks</li>
-              <li>• Create and view reports</li>
-              <li>• Send team announcements</li>
-              <li>• Cannot manage Executive Managers</li>
+              <li>• Gerenciar membros da equipe</li>
+              <li>• Atribuir e acompanhar tarefas</li>
+              <li>• Criar e visualizar relatórios</li>
+              <li>• Enviar avisos para a equipe</li>
+              <li>• Não pode gerenciar Gerentes Executivos</li>
             </ul>
           </div>
           
           <div className="border border-gray-200 rounded-lg p-4">
-            <h4 className="font-medium text-blue-600 mb-2">Employee</h4>
+            <h4 className="font-medium text-blue-600 mb-2">Funcionário</h4>
             <ul className="text-sm text-gray-600 space-y-1">
-              <li>• View and update assigned tasks</li>
-              <li>• View team announcements</li>
-              <li>• Update own profile information</li>
-              <li>• Limited reporting access</li>
-              <li>• No user management permissions</li>
+              <li>• Ver e atualizar tarefas atribuídas</li>
+              <li>• Ver avisos da equipe</li>
+              <li>• Atualizar informações do perfil</li>
+              <li>• Acesso limitado a relatórios</li>
+              <li>• Sem permissões de gestão de usuários</li>
             </ul>
           </div>
         </div>
