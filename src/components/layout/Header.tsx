@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Bell, Settings, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { RoleTranslations } from '../../types';
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -15,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       <div className="flex items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex items-center">
           {children}
-          <h1 className="ml-2 text-lg font-semibold text-gray-800">Team Coordination System</h1>
+          <h1 className="ml-2 text-lg font-semibold text-gray-800">Sistema de Coordenação de Equipe</h1>
         </div>
         
         <div className="flex items-center space-x-4">
@@ -31,9 +32,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             <div className="mr-2 flex flex-col items-end">
               <span className="text-sm font-medium text-gray-900">{user?.name}</span>
               <span className="text-xs text-gray-500">
-                {user?.role === 'EXECUTIVE_MANAGER' && 'Executive Manager'}
-                {user?.role === 'COORDINATOR' && 'Coordinator'}
-                {user?.role === 'EMPLOYEE' && 'Employee'}
+                {user?.role && RoleTranslations[user.role]}
               </span>
             </div>
             
@@ -42,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                 <img 
                   className="h-8 w-8 rounded-full border border-gray-300"
                   src={user?.avatar || "https://via.placeholder.com/150"}
-                  alt="User avatar"
+                  alt="Avatar do usuário"
                 />
               </button>
             </div>

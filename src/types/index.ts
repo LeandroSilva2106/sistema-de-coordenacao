@@ -62,3 +62,22 @@ export interface Report {
   createdAt: string;
   type: 'performance' | 'tasks' | 'attendance' | 'custom';
 }
+
+// Translation mappings
+export const StatusTranslations = {
+  'pending': 'pendente',
+  'in-progress': 'em andamento',
+  'completed': 'concluído'
+} as const;
+
+export const PriorityTranslations = {
+  'low': 'baixa',
+  'medium': 'média',
+  'high': 'alta'
+} as const;
+
+export const RoleTranslations = {
+  [UserRole.EXECUTIVE_MANAGER]: 'Gerente Executivo',
+  [UserRole.COORDINATOR]: 'Coordenador',
+  [UserRole.EMPLOYEE]: 'Funcionário'
+} as const;

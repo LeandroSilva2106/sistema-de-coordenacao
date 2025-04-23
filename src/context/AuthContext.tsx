@@ -5,25 +5,25 @@ import { UserRole, User } from '../types';
 const MOCK_USERS = [
   {
     id: '1',
-    name: 'John Manager',
-    email: 'manager@example.com',
-    password: 'password123',
+    name: 'João Gerente',
+    email: 'gerente@exemplo.com',
+    password: 'senha123',
     role: UserRole.EXECUTIVE_MANAGER,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&1',
   },
   {
     id: '2',
-    name: 'Sara Coordinator',
-    email: 'coordinator@example.com',
-    password: 'password123',
+    name: 'Sara Coordenadora',
+    email: 'coordenadora@exemplo.com',
+    password: 'senha123',
     role: UserRole.COORDINATOR,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&2',
   },
   {
     id: '3',
-    name: 'Mike Employee',
-    email: 'employee@example.com',
-    password: 'password123',
+    name: 'Miguel Funcionário',
+    email: 'funcionario@exemplo.com',
+    password: 'senha123',
     role: UserRole.EMPLOYEE,
     avatar: 'https://source.unsplash.com/random/200x200/?portrait&3',
   },
@@ -87,7 +87,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useAuth deve ser usado dentro de um AuthProvider');
   }
   return context;
 };

@@ -59,22 +59,22 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         <nav className="px-2 py-4 space-y-1">
           <NavLink to="/dashboard" className={navLinkClass} onClick={onClose}>
             <LayoutDashboard size={18} className="mr-3" />
-            <span>Dashboard</span>
+            <span>Painel</span>
           </NavLink>
           
           <NavLink to="/tasks" className={navLinkClass} onClick={onClose}>
             <CheckSquare size={18} className="mr-3" />
-            <span>Tasks</span>
+            <span>Tarefas</span>
           </NavLink>
           
           <NavLink to="/announcements" className={navLinkClass} onClick={onClose}>
             <Bell size={18} className="mr-3" />
-            <span>Announcements</span>
+            <span>Avisos</span>
           </NavLink>
           
           <NavLink to="/calendar" className={navLinkClass} onClick={onClose}>
             <Calendar size={18} className="mr-3" />
-            <span>Calendar</span>
+            <span>Calendário</span>
           </NavLink>
           
           {/* Conditional menu items based on role */}
@@ -82,19 +82,19 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
             <>
               <NavLink to="/users" className={navLinkClass} onClick={onClose}>
                 <Users size={18} className="mr-3" />
-                <span>User Management</span>
+                <span>Gestão de Usuários</span>
               </NavLink>
               
               <NavLink to="/reports" className={navLinkClass} onClick={onClose}>
                 <BarChart size={18} className="mr-3" />
-                <span>Reports</span>
+                <span>Relatórios</span>
               </NavLink>
             </>
           )}
           
           <NavLink to="/settings" className={navLinkClass} onClick={onClose}>
             <Settings size={18} className="mr-3" />
-            <span>Settings</span>
+            <span>Configurações</span>
           </NavLink>
         </nav>
       </div>
